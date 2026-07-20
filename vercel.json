@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/verify-email.js": {
+      "maxDuration": 10
+    }
+  }
+}
