@@ -1,7 +1,14 @@
 // Simple in-memory rate limiter (resets on cold start, fine for basic abuse protection)
 const requestLog = new Map();
-const RATE_LIMIT = 10; // max requests
+const RATE_LIMIT = 20; // max requests
 const RATE_WINDOW_MS = 60 * 1000; // per 1 minute, per IP
+const ALLOWED_ORIGINS = [
+  'https://ampifire.com',
+  'https://yes.ampifire.com',
+  'https://now.ampifire.com',
+  'https://get.ampifire.com',
+  'https://live.ampifire.ai',
+];
 
 function isRateLimited(ip) {
   const now = Date.now();
@@ -20,7 +27,14 @@ function isRateLimited(ip) {
 
 export default async function handler(req, res) {
   // Lock CORS to ampifire.com only
-  res.setHeader('Access-Control-Allow-Origin', 'https://ampifire.com');
+  const origin = req.headers.origin || req.headers.referer || '';
+  const isAllowed = ALLOWED_ORIGINS.some(allowed => origin.startsWith(allowed));
+
+  if (!isAllowed) {
+    return res.status(403).json({ error: 'forbidden' });
+  }
+
+  res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
