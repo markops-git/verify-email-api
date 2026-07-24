@@ -11,6 +11,9 @@ const BLOCKED_DOMAINS = {
     'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com',
     'aol.com', 'icloud.com', 'protonmail.com', 'mail.com', 'gmx.com'
   ],
+  search_engine: [
+  'google.com', 'bing.com', 'duckduckgo.com', 'baidu.com'
+  ],
   social_media: [
     'facebook.com', 'instagram.com', 'linkedin.com', 'twitter.com', 'x.com',
     'tiktok.com', 'youtube.com', 'pinterest.com', 'threads.net', 'snapchat.com',
