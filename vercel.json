@@ -2,6 +2,9 @@
   "functions": {
     "api/verify-email.js": {
       "maxDuration": 10
+    },
+    "api/sendflow-relay.js": {
+      "maxDuration": 10
     }
   }
 }
